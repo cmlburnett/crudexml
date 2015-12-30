@@ -11,27 +11,28 @@ This keeps things simpler.
 Also, unlike Real DOM Implementations, the text node is a named node with text underneath it.
 
 Example use:
+
 	from crudexml import node, tnode
 
-    root = node('dvd', numtitles=7, parser="pydvdread %s"%1.0)
-    root.AddChild( tnode('device', "/dev/sr0") )
-    root.AddChild( tnode('name', "BLOOD_DIAMOND", fancy="Blood Diamond") )
-    root.AddChild( tnode('vmg_id', "DVDVIDEO-VMG") )
-    root.AddChild( tnode('provider_id', "WARNER_HOME_VIDEO") )
-    titles = root.AddChild( node('titles') )
+	root = node('dvd', numtitles=7, parser="pydvdread %s"%1.0)
+	root.AddChild( tnode('device', "/dev/sr0") )
+	root.AddChild( tnode('name', "BLOOD_DIAMOND", fancy="Blood Diamond") )
+	root.AddChild( tnode('vmg_id', "DVDVIDEO-VMG") )
+	root.AddChild( tnode('provider_id', "WARNER_HOME_VIDEO") )
+	titles = root.AddChild( node('titles') )
 
 Attributes are passed as named keywords to node() and tnode(), and can be accessed by using [...] on node nbjects.
 node.AddChild() returns the supplied node as with @titles above.
 The OuterXMLPretty for the above produces:
 
-    <?xml version="1.0" ?>
-    <dvd numtitles="7" parser="pydvdread 1.0">
-        <device>/dev/sr0</device>
-        <name fancy="Blood Diamond">BLOOD_DIAMOND</name>
-        <vmg_id>DVDVIDEO-VMG</vmg_id>
-        <provider_id>WARNER_HOME_VIDEO</provider_id>
-        <titles/>
-    </dvd>
+	<?xml version="1.0" ?>
+	<dvd numtitles="7" parser="pydvdread 1.0">
+		<device>/dev/sr0</device>
+		<name fancy="Blood Diamond">BLOOD_DIAMOND</name>
+		<vmg_id>DVDVIDEO-VMG</vmg_id>
+		<provider_id>WARNER_HOME_VIDEO</provider_id>
+		<titles/>
+	</dvd>
 
 Additionally, the DOCTYPE is supported.
 

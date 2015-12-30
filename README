@@ -61,4 +61,5 @@ And the XML:
 		<titles/>
 	</dvd>
 
+The docroot() produces no XML for itself (i.e., OuterXML == InnerXML) and why the DOCTYPE and <dvd>...</dvd> are shown at the "root" level.
 

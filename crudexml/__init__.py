@@ -32,7 +32,7 @@ from xml.sax.saxutils import unescape as XMLunescape
 from xml.dom.minidom import parseString as MDparseString
 from xml.parsers.expat import ExpatError
 
-__all__ = ['attresc', 'tnode', 'node']
+__all__ = ['attresc', 'tnode', 'node', 'dnode', 'docroot']
 
 def attresc(v):
 	"""
@@ -228,4 +228,24 @@ class node(_node):
 		"""
 		ret = [x.OuterXML for x in self.C]
 		return "".join(ret)
+
+class docroot(node):
+	def __init__(self):
+		node.__init__(self, None)
+
+	@property
+	def OuterXML(self):
+		return self.InnerXML
+
+class dnode(_node):
+	def __init__(self, name, systemId):
+		_node.__init__(self, name)
+		self._systemId = systemId
+
+	@property
+	def OuterXML(self):
+		if self._systemId:
+			return '<!DOCTYPE %s SYSTEM "%s">' % (self.Name, self._systemId)
+		else:
+			return '<!DOCTYPE %s>' % (self.Name,)
 
